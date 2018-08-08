@@ -1,0 +1,57 @@
+#Установка  кодировки сервера
+AddDefaultCharset UTF-8
+
+#запрет  листинга  (просмотра содержимого) каталогов
+Options -Indexes
+
+#разрешение  листинга  (просмотра содержимого) каталогов
+Options +Indexes
+
+# Стилизация индекса файлов
+IndexOptions FancyIndexing
+IndexOptions FancyIndexing ScanHTMLTitles
+
+# Исключить из листинга  определенные типы файлов или конкретные файлы 
+IndexIgnore *.rar *.zip *.txt 403.jpg
+
+# Исключить из листинга  все файлы
+# IndexIgnore *
+
+# Переопределение индексного файла, на конкретный файл
+# DirectoryIndex hello.php
+
+# Выполнение PHP кода в не HTML и HTML файлах
+AddType application/x-httpd-php .html .htm
+
+# Страницы ошибок
+# относительный путь,  файл htacces находится внутри папки /htaccess
+ErrorDocument 404 /404.html
+# ErrorDocument 404 http://ya.ru
+
+# Пимитивный редирект с подменой заголовков
+# Redirect 301 /file.html /user.html
+
+# Через регулярные выражения выбор любого html файла и перенаправление
+# . - любой символ  
+# \. - экранированный символ точка, именно точка
+# $ - конец строки
+# RedirectMatch (.+\.html$) /hello.php?file=$1
+
+# То же самое, только передать в GET только имя файла, без имени категории
+# [^/] - что угодно кроме слеша
+# (rar|zip) - расширение html или htm
+# .*? - Сделать регулярку "не жадной". Без этого он съест folder/test2.html => 2.html
+# C этим будет test2.html
+# RedirectMatch .*?([^/].+\.(html|htm))$ /hello.php?file=$1
+
+RewriteEngine On
+RewriteBase /
+
+# Redirects all requests to index
+RewriteCond %{REQUEST_FILENAME} !-f 
+RewriteCond %{REQUEST_FILENAME} !-d
+
+RewriteRule . index.php 
+
+
+
