@@ -1,8 +1,5 @@
 <?php
 
-include_once '/models/Category.php';
-include_once '/models/Product.php';
-
 /**
  * Description of SiteController
  *

@@ -1,7 +1,4 @@
 <?php
-include_once '/models/Category.php';
-include_once '/models/Product.php';
-include_once '/components/Pagination.php';
 
 /*
  * To change this license header, choose License Headers in Project Properties.
