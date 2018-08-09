@@ -1,6 +1,5 @@
 <?php
 
-include_once ROOT . '/models/News.php';
 /**
  * Description of NewsController
  *
