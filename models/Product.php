@@ -107,7 +107,35 @@ class Product {
         
     }
     
-    
+    /**
+     * Продукт с выбранными id
+     * @param int $id
+     */
+    public static function getProductByIds($idsArray) {
+        
+        $products = array();
+        
+        //подключение к БД
+        $db = Db::getConnection();
+
+        $idsString = implode(',', $idsArray);
+        
+        $sql = "SELECT * FROM product WHERE status='1' AND id IN ($idsString)";
+        
+        $result = $db->query($sql);
+        $result->setFetchMode(PDO::FETCH_ASSOC);
+
+        $i = 0;
+        while ($row = $result->fetch()){
+            $products[$i]['id'] = $row['id'];
+            $products[$i]['code'] = $row['code'];
+            $products[$i]['name'] = $row['name'];
+            $products[$i]['price'] = $row['price'];
+            $i++;
+        }
+        
+        return $products;
+    }
     /**
      * Количество товаров в категории
      * @param int $categoryId
